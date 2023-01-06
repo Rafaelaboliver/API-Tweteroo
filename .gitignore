@@ -1,0 +1,8 @@
+#dependecies
+/node_modules
+
+#front-end
+/assets
+/css
+index.html
+script.js
