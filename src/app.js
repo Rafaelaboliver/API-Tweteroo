@@ -25,19 +25,19 @@ app.post('/sign-up', (req, res) => {
 //POST tweets:
 app.post('/tweets', (req, res) => {
     const data = req.body;
-    const userRegistered = register.filter(item => item.username == data.username); 
+    const userRegistered = register.find(item => item.username === data.username); 
 
     if(!userRegistered) {
         return res.status(401).send('UNAUTHORIZED');
     }
 
     messages.push(data);
-    res.status(200).send(OK);
+    res.status(200).send('OK');
 })
 
 //GET /tweets:
 app.get('/tweets', (req, res) => {
-    
+
 })
 
 
