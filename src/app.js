@@ -40,10 +40,13 @@ app.post('/tweets', (req, res) => {
 
 //GET /tweets:
 app.get('/tweets', (req, res) => {
-    const { messageLimit } = req.query;
-    const messageReverse = messages.reverse();
+    const newMessages =[...messages];
 
-    const lastMessages = messageReverse.slice(0, parseInt(messageLimit))
+    const messagesReverse = newMessages.reverse();
+    const lastMessages = messagesReverse.slice( 0, 10);
+
+
+    
     res.send(lastMessages);
 })
 
