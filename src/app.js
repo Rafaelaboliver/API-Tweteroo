@@ -9,16 +9,18 @@ app.use(cors());
 const register = [];
 const messages = [];
 
+let profileImgage = {avatar: ""};
 
 //POST sign-up:
 app.post('/sign-up', (req, res) => {
     const data = req.body;
+    register.push(data);
 
     if(!data.username || !data.avatar){
         return res.status(422).send('Todos os campos são obrigatórios!');
     }
 
-    register.push(data);
+    profileImgage.avatar = req.body.avatar;
     res.status(200).send('OK');
 });
 
@@ -31,13 +33,15 @@ app.post('/tweets', (req, res) => {
         return res.status(401).send('UNAUTHORIZED');
     }
 
-    messages.push(data);
+    messages.push({...data, ...profileImgage});
+    console.log('CHECK', messages)
     res.status(200).send('OK');
 })
 
 //GET /tweets:
 app.get('/tweets', (req, res) => {
 
+    res.send(messages);
 })
 
 
