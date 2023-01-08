@@ -21,7 +21,7 @@ app.post('/sign-up', (req, res) => {
     }
 
     profileImgage.avatar = req.body.avatar;
-    res.status(200).send('OK');
+    res.status(201).send('OK');
 });
 
 //POST tweets:
@@ -33,24 +33,25 @@ app.post('/tweets', (req, res) => {
         return res.status(401).send('UNAUTHORIZED');
     }
 
+    if (!data.tweet) {
+        return res.status(400).send('Todos os campos são obrigatórios!')
+    }
+
     messages.push({...data, ...profileImgage});
-    console.log('CHECK', messages)
-    res.status(200).send('OK');
+    res.status(201).send('OK');
 })
 
 //GET /tweets:
-app.get('/tweets', (req, res) => {
+app.get('/tweets/:username?', (req, res) => {
     const newMessages =[...messages];
-
     const messagesReverse = newMessages.reverse();
     const lastMessages = messagesReverse.slice( 0, 10);
-
-
     
     res.send(lastMessages);
+
 })
 
 
 //ATENÇAO: configurar o servidor para rodar na porta 5000 antes de enviar o projeto!
-const PORT = 5003;
+const PORT = 5000;
 app.listen(PORT, () => console. log(`suava na nave, recebendo na porta ${PORT}`));
